@@ -8,6 +8,11 @@
 
 using namespace std;
 
+bool isDigit(char c){ //function to determine if a character is a digit 
+	
+	return isdigit(c);
+}
+
 
 // function that evaluates the prefix expression we enter in
 double calculate (string expression)
@@ -21,7 +26,7 @@ double calculate (string expression)
 
       // pushes operand to Stack 
       // checks if we are working with a digit
-      if (isOperand (expression[i]))
+      if (isDigit (expression[i]))
 	// converts expression[i] to a digit by subtracting '0' from it
 	Stack.push (expression[i] - '0');
 
@@ -62,6 +67,6 @@ double calculate (string expression)
 int main ()
 {
   string expression = "+9*20";
-  cout << calculate (expression) << endl;
+  cout << calculate ( expression) << endl;
   return 0;
 }
