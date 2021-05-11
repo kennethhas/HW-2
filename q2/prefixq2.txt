@@ -1,0 +1,67 @@
+#include <iostream> 
+#include <iomanip>
+#include <string>
+#include <algorithm>
+#include <stack>
+#include <fstream>
+#include <prefix.h>
+
+using namespace std;
+
+
+// function that evaluates the prefix expression we enter in
+double calculate (string expression)
+{
+  // Instantiate a new stack containing double values
+  stack < double >Stack;
+
+  // for loop that iterates through the entire expression
+  for (int i = expression.size () - 1; i >= 0; i--)
+    {
+
+      // pushes operand to Stack 
+      // checks if we are working with a digit
+      if (isOperand (expression[i]))
+	// converts expression[i] to a digit by subtracting '0' from it
+	Stack.push (expression[i] - '0');
+
+      // the else indicates that we are working with an operator
+      else
+	{
+
+	  // pops two elements from Stack 
+	  double op1 = Stack.top ();
+	  Stack.pop ();
+	  double op2 = Stack.top ();
+	  Stack.pop ();
+
+	  // uses switch case to operate on opOne and opTwo 
+	  // performs opOne O opTwo. 
+	  switch (expression[i])
+	    {
+	    case '+':
+	      Stack.push (op1 + op2);
+	      break;
+	    case '-':
+	      Stack.push (op1 - op2);
+	      break;
+	    case '*':
+	      Stack.push (op1 * op2);
+	      break;
+	    case '/':
+	      Stack.push (op1/ op2);
+	      break;
+	    }
+	}
+    }
+
+  return Stack.top ();
+}
+
+// tests our work in main 
+int main ()
+{
+  string expression = "+9*20";
+  cout << calculate (expression) << endl;
+  return 0;
+}
